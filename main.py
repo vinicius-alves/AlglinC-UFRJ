@@ -2,27 +2,22 @@ import numpy as np
 import my_lib  
 
 matriz_A_linhas = [
-	[ 5,-4, 1, 0],
-	[-4, 6,-4, 1],
-	[ 1,-4, 6,-4],
-	[ 0, 1,-4, 5]
+	[1,2,2],
+	[4,4,2],
+	[4,6,4]
 ]
 
 matriz_B_linhas = [
-	[-1],
-	[ 0],
-	[ 1],
-	[ 0]
+	[3],
+	[6],
+	[10]
 ]
 
 matriz_A = my_lib.criar_matriz(matriz_A_linhas)
 
 matriz_B = my_lib.criar_array(matriz_B_linhas)
 
-matriz_L, matriz_U = my_lib.decomposicaoLU(matriz_A)
+matriz_X = my_lib.resolver_sistema_por_decomposicao_LU(matriz_A, matriz_B)
 
-matriz_Y = my_lib.multiplicacao_retro_substituicao(matriz_L,matriz_B)
+my_lib.print_array_resposta(matriz_X)
 
-matriz_X =  my_lib.multiplicacao_substituicao_para_frente(matriz_U, matriz_Y)
-
-print(matriz_X)

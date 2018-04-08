@@ -99,3 +99,28 @@ def multiplicacao_substituicao_para_frente(matriz_U, matriz_Y):
 			matriz_X[i] = (matriz_Y[i]- soma)/matriz_U[i][i]
 
 	return matriz_X
+
+def resolver_sistema_por_decomposicao_LU(matriz_A,matriz_B):
+
+	matriz_L, matriz_U = decomposicaoLU(matriz_A)
+	matriz_Y = multiplicacao_retro_substituicao(matriz_L,matriz_B)
+	matriz_X =  multiplicacao_substituicao_para_frente(matriz_U, matriz_Y)
+
+	return(matriz_X)
+
+def print_array_resposta(matriz_X):
+
+	print("\n")
+
+	for i in range(len(matriz_X)):
+		if(i==0):
+			if(matriz_X[i]<0):	
+				print("matriz_X = |",matriz_X[i],"|")
+			else:
+				print("           | ",matriz_X[i],"|")
+
+		else:
+			if(matriz_X[i]<0):	
+				print("           |",matriz_X[i],"|")
+			else:
+				print("           | ",matriz_X[i],"|")
