@@ -21,4 +21,8 @@ matriz_B = my_lib.criar_array(matriz_B_linhas)
 
 matriz_L, matriz_U = my_lib.decomposicaoLU(matriz_A)
 
-my_lib.multiplicacao_substituicao_pra_frente(matriz_U,matriz_B)
+matriz_Y = my_lib.multiplicacao_retro_substituicao(matriz_L,matriz_B)
+
+matriz_X =  my_lib.multiplicacao_substituicao_para_frente(matriz_U, matriz_Y)
+
+print(matriz_X)
