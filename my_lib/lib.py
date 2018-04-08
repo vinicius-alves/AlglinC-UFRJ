@@ -3,6 +3,9 @@ import numpy as np
 
 def criar_matriz(lista_de_linhas):
 	return np.matrix(lista_de_linhas)
+
+def criar_array(lista_de_itens):
+	return np.array(lista_de_itens)
 	
 def determinante(matriz):
 	return np.linalg.det(matriz)
@@ -28,10 +31,10 @@ def transposta(matriz):
 def decomposicaoLU(matriz):
 
 	if(not(e_quadrada(matriz))):
-		raise ArithmeticError("DecomposiçãoLU não aplicável, a matriz não é quadrada")
+		raise ArithmeticError("Decomposição LU não aplicável, a matriz não é quadrada")
 
 	if(not(e_nao_singular(matriz))):
-		raise ArithmeticError("DecomposiçãoLU não aplicável, a matriz é singular")
+		raise ArithmeticError("Decomposição LU não aplicável, a matriz é singular")
 
 	size = matriz.shape[0]
 	matriz_L = np.zeros(matriz.shape)
@@ -57,3 +60,28 @@ def decomposicaoLU(matriz):
 
 
 	return matriz_L, matriz_U
+
+
+def multiplicacao_substituicao_pra_frente(matriz_U, matriz_B):
+	
+	matriz_Y = np.zeros(matriz_U.shape[0])
+	num_linhas = matriz_U.shape[0]
+	num_colunas = matriz_U.shape[1]
+
+	print(matriz_U)
+	
+	for i in range(num_linhas-1,-1,-1):
+		if(i==num_linhas-1):
+			matriz_Y[i] = matriz_B[i]/matriz_U[i][i]
+		else:
+			soma = 0
+			for j in range(i,num_colunas-1):
+
+				soma+= (matriz_U[i][j+1]*matriz_Y[j+1])
+
+			matriz_Y[i] = (matriz_B[i]- soma)/matriz_U[i][i]
+
+	return matriz_Y
+
+
+
