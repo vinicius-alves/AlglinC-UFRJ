@@ -1,32 +1,6 @@
-import sys
-import numpy as np
+from .metodos_basicos import *
 
-def criar_matriz(lista_de_linhas):
-	return np.matrix(lista_de_linhas)
-
-def criar_array(lista_de_itens):
-	return np.array(lista_de_itens)
-	
-def determinante(matriz):
-	return np.linalg.det(matriz)
-	
-def e_inversivel(matriz):
-	return np.linalg.cond(matriz) < 1/sys.float_info.epsilon
-
-def e_quadrada(matriz):
-	return 	matriz.shape[0] == matriz.shape[1]
-
-def e_nao_singular(matriz):
-	return e_inversivel(matriz)
-	
-def inversa(matriz):
-	return np.linalg.inv(matriz)
-	
-def e_simetrica(matriz):
-	return np.allclose(matriz, matriz.T, atol=1e-8)
-	
-def transposta(matriz):
-	return np.transpose(matriz)
+#Exercício 1
 
 def decomposicaoLU(matriz):
 
@@ -102,6 +76,9 @@ def multiplicacao_substituicao_para_frente(matriz_U, matriz_Y):
 
 def resolver_sistema_por_decomposicao_LU(matriz_A,matriz_B):
 
+	if(matriz_A.shape[0] != matriz_B.shape[0]):
+		raise ArithmeticError("Matriz A e B possuem diferente número de linhas")
+
 	matriz_L, matriz_U = decomposicaoLU(matriz_A)
 	matriz_Y = multiplicacao_retro_substituicao(matriz_L,matriz_B)
 	matriz_X =  multiplicacao_substituicao_para_frente(matriz_U, matriz_Y)
@@ -115,12 +92,12 @@ def print_array_resposta(matriz_X):
 	for i in range(len(matriz_X)):
 		if(i==0):
 			if(matriz_X[i]<0):	
-				print("matriz_X = |",matriz_X[i],"|")
+				print(" matriz_X = |","%.3f" % matriz_X[i],"|")
 			else:
-				print("           | ",matriz_X[i],"|")
+				print(" matriz_X = | ","%.3f" % matriz_X[i],"|")
 
 		else:
 			if(matriz_X[i]<0):	
-				print("           |",matriz_X[i],"|")
+				print("            |","%.3f" % matriz_X[i],"|")
 			else:
-				print("           | ",matriz_X[i],"|")
+				print("            | ","%.3f" % matriz_X[i],"|")
