@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import my_lib  
 
 #Exercício 3
@@ -33,5 +35,9 @@ matriz_A = my_lib.criar_matriz(matriz_A_linhas)
 matriz_B = my_lib.criar_array(matriz_B_linhas)
 
 matriz_X = my_lib.resolver_sistema_por_decomposicao_LU(matriz_A, matriz_B)
+
+my_lib.print_array_resposta(matriz_X)
+
+matriz_X = my_lib.resolver_sistema_por_decomposicao_de_Cholesky(matriz_A, matriz_B)
 
 my_lib.print_array_resposta(matriz_X)

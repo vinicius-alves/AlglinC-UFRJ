@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from .metodos_basicos import *
 
 #Exercício 1
@@ -101,3 +103,51 @@ def print_array_resposta(matriz_X):
 				print("            |","%.3f" % matriz_X[i],"|")
 			else:
 				print("            | ","%.3f" % matriz_X[i],"|")
+
+#Exercício 2
+
+def decomposicaoCholesky(matriz):
+
+	if(not(e_simetrica(matriz))):
+		raise ArithmeticError("Decomposiçao de Cholesky não aplicável, a matriz não é simétrica")
+
+	if(not(e_nao_singular(matriz))):
+		raise ArithmeticError("Decomposição de Cholesky não aplicável, a matriz é singular")
+
+	if(not(e_positiva_definida(matriz))):
+		raise ArithmeticError("Decomposiçao de Cholesky não aplicável, a matriz não é positiva definida")
+
+	size = matriz.shape[0]
+	resultado = np.zeros(matriz.shape)
+
+	for i in range(size):
+
+		somatorio1 = 0
+
+		for k in range(i):
+			somatorio1 += (resultado[i][k])**2
+
+		resultado[i][i] = (matriz.A[i][i] - somatorio1)**0.5
+
+		for j in range(i, size):
+
+			somatorio2 = 0
+
+			for k in range(i):
+				somatorio2 += resultado[i][k]*resultado[j][k]
+
+			resultado[j][i] = (1/resultado[i][i])*(matriz.A[i][j] - somatorio2)
+
+	return resultado
+
+def resolver_sistema_por_decomposicao_de_Cholesky(matriz_A,matriz_B):
+
+	if(matriz_A.shape[0] != matriz_B.shape[0]):
+		raise ArithmeticError("Matriz A e B possuem diferente número de linhas")
+
+	matriz_L = decomposicaoCholesky(matriz_A)
+	matriz_U = transposta(matriz_L)
+	matriz_Y = multiplicacao_retro_substituicao(matriz_L, matriz_B)
+	matriz_X = multiplicacao_substituicao_para_frente(matriz_U, matriz_Y)
+
+	return(matriz_X)

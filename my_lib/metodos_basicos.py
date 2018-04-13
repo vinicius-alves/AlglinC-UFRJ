@@ -1,5 +1,6 @@
 import sys
 import numpy as np
+import math
 
 def criar_matriz(lista_de_linhas):
 	return np.matrix(lista_de_linhas)
@@ -27,3 +28,6 @@ def e_simetrica(matriz):
 	
 def transposta(matriz):
 	return np.transpose(matriz)
+
+def e_positiva_definida(matriz):
+	return np.all(np.linalg.eigvals(matriz) > 0)
