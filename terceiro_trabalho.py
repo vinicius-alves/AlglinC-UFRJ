@@ -29,3 +29,8 @@ matriz_B = my_lib.interpolacao_polinomial(array_X,array_Y)
 print"Exercício 2"
 
 my_lib.print_polinomio(matriz_B)
+
+print"Exercício 4"
+
+my_lib.interpolacao_lagrange(array_X,array_Y)
+
