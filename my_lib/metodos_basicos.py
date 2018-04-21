@@ -31,3 +31,8 @@ def transposta(matriz):
 
 def e_positiva_definida(matriz):
 	return np.all(np.linalg.eigvals(matriz) > 0)
+
+def valor_polinomio_no_ponto(array_coeficientes, ponto_alvo):
+	#array[::-1] inverte a ordem dos elementos do array
+	#print   np.poly1d(array_coeficientes[::-1])
+	return  np.poly1d(array_coeficientes[::-1])(ponto_alvo)

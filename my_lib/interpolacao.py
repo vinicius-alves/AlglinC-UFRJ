@@ -59,8 +59,10 @@ def interpolacao_lagrange(array_X, array_Y):
 		divisor = 1
 		polinomioIteracao = np.poly1d([1])
 
-	return polinomioInterpolacao.c
+	return polinomioInterpolacao.c[::-1]
 	
+
+# Util
 
 def print_polinomio(array_polinomio):
 
