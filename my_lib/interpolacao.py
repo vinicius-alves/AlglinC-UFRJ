@@ -9,6 +9,9 @@ def interpolacao_polinomial(array_X, array_Y):
 	if(len(array_X) != len(array_Y)):
 		raise ArithmeticError("array_X e array_Y têm dimensões distintas")
 
+	if( (len(np.unique(array_X)) != len(array_X)) or (len(np.unique(array_Y)) != len(array_Y)) ):
+		raise ArithmeticError("Pontos colineares, interpolação não é possível")
+
 	numero_pontos = len(array_X)
 
 	lista_matriz_P = []
@@ -24,7 +27,7 @@ def interpolacao_polinomial(array_X, array_Y):
 
 	matriz_B = inversa(matriz_P_transposta*matriz_P)*(matriz_P_transposta*matriz_Y)
 
-	return matriz_B
+	return matriz_B.T.A[0]
 
 
 #Exercício 4
@@ -34,53 +37,44 @@ def interpolacao_lagrange(array_X, array_Y):
 	if(len(array_X) != len(array_Y)):
 		raise ArithmeticError("array_X e array_Y têm dimensões distintas")
 
-
-	lista_fi = []
+	if( (len(np.unique(array_X)) != len(array_X)) or (len(np.unique(array_Y)) != len(array_Y)) ):
+		raise ArithmeticError("Pontos colineares, interpolação não é possível")
 
 	numero_pontos = len(array_X)
 
-	polinomio = []
+	polinomioIteracao = np.poly1d([1])
+	polinomioInterpolacao = np.poly1d([0])
 	divisor = 1
 
 	for i in range(numero_pontos):
 
 		for j in range(numero_pontos):
-			divisor *= array_X[j] - array_X[i]
+			if(i!=j):
+				divisor *= array_X[i] - array_X[j]
+ 				polinomioIteracao *= np.poly1d([1,- array_X[j]])
 
-		#for j in range(numero_pontos):
 
-		#	coeficiente = 
+		polinomioInterpolacao += polinomioIteracao*(array_Y[i]/float(divisor))
 
-		#	polinomio.append(coeficiente)
-
-		lista_fi.append(np.poly1d(polinomio))
-		polinomio = []
 		divisor = 1
+		polinomioIteracao = np.poly1d([1])
 
+	return polinomioInterpolacao.c
+	
 
-
-
-
-
-
-
-
-
-
-def print_polinomio(matriz_B):
-	array_B = matriz_B.T.A[0]
+def print_polinomio(array_polinomio):
 
 	polinomio_string = "\nPolinômio = "
 
-	for i in range(len(array_B)-1,-1,-1):
+	for i in range(len(array_polinomio)-1,-1,-1):
 
-		if( i != len(array_B)-1):
+		if( i != len(array_polinomio)-1):
 				polinomio_string += " "
 
-		if(array_B[i]>0):
-			polinomio_string += "+"+"%.2f" %array_B[i]
+		if(array_polinomio[i]>0):
+			polinomio_string += "+"+"%.2f" %array_polinomio[i]
 		else:
-			polinomio_string += "%.2f" %array_B[i] 
+			polinomio_string += "%.2f" %array_polinomio[i] 
 
 		if(i!=0):
 			polinomio_string += "X^"+str(i)
