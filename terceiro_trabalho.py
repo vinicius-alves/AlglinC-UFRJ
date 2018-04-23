@@ -29,6 +29,15 @@ my_lib.print_polinomio(array_B)
 
 funcao_exercicio_2 = array_B
 
+print"Exercício 3"
+
+b1,b2 = my_lib.regredir_fx_b1x_b2(array_X,array_Y, exibir_grafico=True) 
+
+def valor_regressao_exercicio3_no_ponto(ponto):
+	return b1*(ponto**b2)
+
+print "\nb1 = ","%.3f" % b1," b2 = ","%.3f" % b2,"\n"
+
 print"Exercício 4"
 
 polinomioLagrange = my_lib.interpolacao_lagrange(array_X,array_Y)
@@ -42,7 +51,7 @@ ponto_alvo = 3.5
 
 print "Valor do ponto " + str(ponto_alvo) + " na função do primeiro exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_1,ponto_alvo))
 print "Valor do ponto " + str(ponto_alvo) + " na função do segundo  exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_2,ponto_alvo))
-#print "Valor do ponto " + str(ponto_alvo) + " na função do terceiro exercício: " +str(my_lib.valor_polinomio_no_ponto(funcao_exercicio_3,ponto_alvo))
+print "Valor do ponto " + str(ponto_alvo) + " na função do terceiro exercício: " +str("%.3f" % valor_regressao_exercicio3_no_ponto(ponto_alvo))
 print "Valor do ponto " + str(ponto_alvo) + " na função do quarto   exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_4,ponto_alvo))
 #print "Valor do ponto " + str(ponto_alvo) + " na função do quinto   exercício: " +str(my_lib.valor_polinomio_no_ponto(funcao_exercicio_5,ponto_alvo))
 
