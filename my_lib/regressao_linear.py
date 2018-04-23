@@ -47,6 +47,7 @@ def regredir_fx_b1x_b2(array_X, array_Y, exibir_grafico = False):
 		plt.plot(X,Y,"")
 		plt.plot(array_X,array_Y,"ro")
 		
+		plt.title(u"Exercício 3 - regressão f(x) = " + str("%.1f" % b1)+"*X^"+ str("%.1f" % b2))
 		plt.ylabel("Y")
 		plt.xlabel("X")
 		plt.show()

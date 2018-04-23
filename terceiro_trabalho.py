@@ -49,9 +49,11 @@ print "Exercício 6"
 
 ponto_alvo = 3.5
 
-print "Valor do ponto " + str(ponto_alvo) + " na função do primeiro exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_1,ponto_alvo))
-print "Valor do ponto " + str(ponto_alvo) + " na função do segundo  exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_2,ponto_alvo))
-print "Valor do ponto " + str(ponto_alvo) + " na função do terceiro exercício: " +str("%.3f" % valor_regressao_exercicio3_no_ponto(ponto_alvo))
-print "Valor do ponto " + str(ponto_alvo) + " na função do quarto   exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_4,ponto_alvo))
+print "\nValor do ponto " + str(ponto_alvo) + " na função do: \n"
+
+print "   primeiro exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_1,ponto_alvo))
+print "   segundo  exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_2,ponto_alvo))
+print "   terceiro exercício: " +str("%.3f" % valor_regressao_exercicio3_no_ponto(ponto_alvo))
+print "   quarto   exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_4,ponto_alvo))
 #print "Valor do ponto " + str(ponto_alvo) + " na função do quinto   exercício: " +str(my_lib.valor_polinomio_no_ponto(funcao_exercicio_5,ponto_alvo))
 
