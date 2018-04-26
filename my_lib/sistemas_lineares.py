@@ -89,20 +89,20 @@ def resolver_sistema_por_decomposicao_LU(matriz_A,matriz_B):
 
 def print_array_resposta(matriz_X):
 
-	print("\n")
+	print "\n"
 
 	for i in range(len(matriz_X)):
 		if(i==0):
 			if(matriz_X[i]<0):	
-				print(" matriz_X = |","%.3f" % matriz_X[i],"|")
+				print " matriz_X = |" + str("%.3f" % matriz_X[i])+"|"
 			else:
-				print(" matriz_X = | ","%.3f" % matriz_X[i],"|")
+				print " matriz_X = | " +str("%.3f" % matriz_X[i])+"|"
 
 		else:
 			if(matriz_X[i]<0):	
-				print("            |","%.3f" % matriz_X[i],"|")
+				print "            |" + str("%.3f" % matriz_X[i])+"|"
 			else:
-				print("            | ","%.3f" % matriz_X[i],"|")
+				print "            | "+ str("%.3f" % matriz_X[i])+"|"
 
 #Exercício 2
 

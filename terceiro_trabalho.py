@@ -47,7 +47,7 @@ funcao_exercicio_4 = polinomioLagrange
 
 print "Exercício 5"
 
-polinomioGrau2 = my_lib.regredir_para_polinomio_grau_2(array_X, array_Y, exibir_grafico = True)
+polinomioGrau2 = my_lib.regredir_para_polinomio_grau_2(array_X, array_Y, exibir_grafico = False)
 
 funcao_exercicio_5 = polinomioGrau2
 

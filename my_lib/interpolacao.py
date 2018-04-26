@@ -82,7 +82,7 @@ def print_polinomio(array_polinomio):
 			polinomio_string += "X^"+str(i)
 
 
-	print polinomio_string + "\n"
+	print polinomio_string 
 
 
 

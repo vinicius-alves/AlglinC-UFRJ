@@ -140,4 +140,9 @@ def pontosUsuario():
 		check = raw_input("Digite Fim para terminar de introduzir pontos; digite qualquer outra coisa para introduzir mais pontos\n")
 
 		if check == "Fim":
+
+			if(len(pontos) <= 1):
+				raise ArithmeticError("São necessários ao menos dois pontos")
+
+
 			return pontos
