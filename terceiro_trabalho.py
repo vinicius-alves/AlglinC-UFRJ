@@ -57,3 +57,8 @@ print "   terceiro exercício: " +str("%.3f" % valor_regressao_exercicio3_no_pon
 print "   quarto   exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_4,ponto_alvo))
 #print "Valor do ponto " + str(ponto_alvo) + " na função do quinto   exercício: " +str(my_lib.valor_polinomio_no_ponto(funcao_exercicio_5,ponto_alvo))
 
+print "\nExercício 9\n"
+
+pontos = my_lib.pontosUsuario()
+
+print my_lib.regressaoLinear(pontos)
