@@ -54,6 +54,7 @@ def regredir_fx_b1x_b2(array_X, array_Y, exibir_grafico = False):
 
 	return b1, b2
 
+
 #Exercício 5
 
 def regredir_para_polinomio_grau_2(array_X, array_Y, exibir_grafico = False):
@@ -94,8 +95,49 @@ def regredir_para_polinomio_grau_2(array_X, array_Y, exibir_grafico = False):
 	return matriz_B.T.A[0]
 
 
+#Exercício 9
 
+def regressaoLinear(pontos):
 
+	somatorio1 = 0
+	somatorio2 = 0
+	somatorio3 = 0
+	somatorio4 = 0
+	somatorio5 = 0
 
-	
+	for i in range(len(pontos)):
+		somatorio1 += 1
+		somatorio2 += pontos[i][0]
+		somatorio3 += (pontos[i][0])**2
+		somatorio4 += pontos[i][1]
+		somatorio5 += pontos[i][0]*pontos[i][1]
 
+	A_linhas = [[somatorio1, somatorio2],[somatorio2, somatorio3]]
+	C_linhas = [[somatorio4],[somatorio5]]
+
+	A = criar_matriz(A_linhas)
+	C = criar_array(C_linhas)
+
+	B = np.dot(inversa(A),C)
+
+	return B
+
+def pontosUsuario():
+
+	pontos = []
+	x = 0
+	y = 0
+
+	while(True):
+
+		x = input("Digite o valor de x: ")
+		y = input("Digite o valor de y: ")
+
+		ponto = [x,y]
+
+		pontos.append(ponto)
+
+		check = raw_input("Digite Fim para terminar de introduzir pontos; digite qualquer outra coisa para introduzir mais pontos\n")
+
+		if check == "Fim":
+			return pontos
