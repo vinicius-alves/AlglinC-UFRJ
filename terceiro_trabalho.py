@@ -57,6 +57,27 @@ print "   terceiro exercício: " +str("%.3f" % valor_regressao_exercicio3_no_pon
 print "   quarto   exercício: " +str("%.3f" % my_lib.valor_polinomio_no_ponto(funcao_exercicio_4,ponto_alvo))
 #print "Valor do ponto " + str(ponto_alvo) + " na função do quinto   exercício: " +str(my_lib.valor_polinomio_no_ponto(funcao_exercicio_5,ponto_alvo))
 
+print "\nExercício 7\n"
+
+A7 = [[1.0 ,-1.0,1.0],
+	 [2.0 , 3.0, 1.0],
+	 [-2.0, 2.0, 3.0]]
+
+C7 = [[9.0],
+	 [5.0],
+	 [2.0]]
+
+A7_matriz = my_lib.criar_matriz(A7)
+C7_matriz = my_lib.criar_array(C7)
+
+print my_lib.resolver_sistema_por_decomposicao_LU(A7_matriz,C7_matriz)
+
+print "\nExercício 8"
+
+pontos = [[1,1],[2,2.5],[3,3.5],[4,4.3]]
+
+print my_lib.ajusteEquacao(pontos)
+
 print "\nExercício 9\n"
 
 pontos = my_lib.pontosUsuario()
