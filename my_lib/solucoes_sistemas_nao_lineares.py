@@ -4,6 +4,7 @@ from .metodos_basicos import *
 import numpy as np
 import matplotlib.pyplot as plt
 from inspect import getsource
+from sympy import *
 
 def visualizar_funcao(function, xmin, xmax, xzero = []):
 	array_x = np.arange(xmin,xmax,0.1)
@@ -19,6 +20,12 @@ def visualizar_funcao(function, xmin, xmax, xzero = []):
 	plt.ylabel("f(x)")
 	plt.xlabel("x")
 	plt.show()
+
+def derivada(function,str_variavel):
+	x = Symbol(str_variavel)
+	diff = function.diff(x)
+	derivada = lambdify(x,diff,'numpy')
+	return derivada
 
 def bissecao(function, a = -10, b = 10, search_a_b = False ,tol = 0.01):
 
