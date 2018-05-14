@@ -36,3 +36,30 @@ def valor_polinomio_no_ponto(array_coeficientes, ponto_alvo):
 	#array[::-1] inverte a ordem dos elementos do array
 	#print   np.poly1d(array_coeficientes[::-1])
 	return  np.poly1d(array_coeficientes[::-1])(ponto_alvo)
+
+def submatriz(matriz, cofator):
+
+	B = [[1] * len(matriz) for i in range(len(matriz))]
+
+	for l in range(len(matriz)):
+		for k in range(len(matriz)):
+			B[l][k] = matriz[l][k]
+
+	B.pop(0)
+
+	for i in range(len(B)):
+		B[i].pop(cofator)
+
+	return B
+
+def det(matriz):
+    X = 0
+
+    if len(matriz) <= 2:
+        return matriz[0][0] * matriz[1][1] - matriz[0][1] * matriz[1][0]
+
+    else:
+        for i in range(len(matriz)):
+            X += matriz[0][i] * ((-1)**i) * det(submatriz(matriz, i))
+
+    return X

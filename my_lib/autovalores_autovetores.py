@@ -42,6 +42,7 @@ def jacobiMethod(matriz_A):
 	maior_valor = 1
 	pos_maior_valor = [0,0]
 	angulo = 0
+	iteracoes = 0
 
 	while (maior_valor > tol):
 
@@ -76,6 +77,9 @@ def jacobiMethod(matriz_A):
 		for i in range(matriz_A.shape[0]):
 			for j in range(matriz_A.shape[0]):
 				if (i != j and abs(matriz_A.A[i][j]) < 0.00000001):
-					matriz_A.A[i][j] = 0			
+					matriz_A.A[i][j] = 0
 
+		iteracoes += 1			
+
+	print iteracoes
 	return matriz_A, matriz_X

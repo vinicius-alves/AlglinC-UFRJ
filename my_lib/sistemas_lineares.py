@@ -151,3 +151,27 @@ def resolver_sistema_por_decomposicao_de_Cholesky(matriz_A,matriz_B):
 	matriz_X = multiplicacao_substituicao_para_frente(matriz_U, matriz_Y)
 
 	return(matriz_X)
+
+def detLU(matriz_A):
+
+	det = 1
+
+	upper = matriz_A[1]
+
+	for i in range(len(upper)):
+		for j in range(len(upper)):
+			if i == j:
+				det *= upper[i][j]
+
+	return det
+
+def detCholesky(matriz_A):
+
+	det = 1
+
+	for i in range(len(matriz_A)):
+		for j in range(len(matriz_A)):
+			if i == j:
+				det *= matriz_A[i][j]
+
+	return det**2
