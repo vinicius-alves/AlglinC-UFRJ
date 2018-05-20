@@ -25,6 +25,8 @@ for i in range(len(xzero)):
 
 #my_lib.visualizar_funcao(function = function_1, xmin = -600, xmax = 600, xzero = xzero)
 
+print '\n'
+
 # Aplicação 2
 
 function_2 = lambda x : 4*np.cos(x) - np.exp(2*x)
@@ -39,3 +41,8 @@ for i in range(len(xzero)):
 	print "xzero["+str(i)+"] = "+str(xzero[i])
 
 #my_lib.visualizar_funcao(function = function_2, xmin = -20, xmax = 4, xzero = xzero)
+
+
+function_3 = lambda x,y : x**2 +2*x + y
+
+print my_lib.derivada_no_ponto(function = function_3, coordenadas = [75,1], indice_variavel = 0 )
