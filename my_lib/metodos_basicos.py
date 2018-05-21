@@ -63,3 +63,9 @@ def det(matriz):
             X += matriz[0][i] * ((-1)**i) * det(submatriz(matriz, i))
 
     return X
+
+def ordenadas_pesos(n):
+	return np.polynomial.legendre.leggauss(n)
+
+def array_vazio(n):
+	return np.empty(n)
