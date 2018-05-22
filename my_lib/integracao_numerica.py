@@ -72,9 +72,6 @@ def quadratura_Gauss(integral):
 
 	ordenadas, pesos = ordenadas_pesos(pontos_de_integracao)
 
-	print ordenadas
-	print pesos
-
 	for i in range(pontos_de_integracao):
 
 		x = 0.5*(integral[1]+integral[2]+((integral[2]-integral[1])*ordenadas[i]))
