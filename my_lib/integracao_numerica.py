@@ -48,9 +48,9 @@ def integracao_polinomial(integral):
 	vandermonde_matriz = criar_matriz(vandermonde)
 
 	for i in range(len(ordenadas)):
-		c[i] = (integral[2]**(i+1.0) - integral[1]**(i+1.0))/(i+1.0)
+		c[i] = (integral[2]**(i+1) - integral[1]**(i+1))/(i+1.0)
 
-	pesos = resolver_sistema_por_decomposicao_LU(vandermonde_matriz,c)
+	pesos = np.linalg.solve(vandermonde_matriz,c)
 
 	for i in range(pontos_de_integracao):
 
@@ -68,7 +68,6 @@ def quadratura_Gauss(integral):
 
 	if pontos_de_integracao not in range(1, 11):
 		print "O número de pontos deve ser um valor inteiro entre 1 e 10"
-		return
 
 	ordenadas, pesos = ordenadas_pesos(pontos_de_integracao)
 
