@@ -32,6 +32,7 @@ def derivada_no_ponto(function,coordenadas,indice_da_variavel, h = 0.00000001):
 	return f_linha_x
 
 
+
 def bissecao(function, a = -10, b = 10, search_a_b = False ,tol = 0.01):
 
 	if(search_a_b):
@@ -67,4 +68,19 @@ def bissecao(function, a = -10, b = 10, search_a_b = False ,tol = 0.01):
 				a = xi
 
 	return xi
+
+
+def metodo_newton_sistemas_nl(functions, num_variaveis):
+
+	num_functions = len(functions)
+
+	jacobiano = np.zeros((num_functions,num_variaveis), dtype = np.float64)
+
+	vetor_x = np.ones(num_variaveis) 
+
+	for i in range(num_functions):
+		for j in range(num_variaveis):
+			jacobiano[i][j] = derivada_no_ponto(function = functions[i], coordenadas = vetor_x , indice_da_variavel = j)
+
+	print jacobiano
 

@@ -42,7 +42,11 @@ for i in range(len(xzero)):
 
 #my_lib.visualizar_funcao(function = function_2, xmin = -20, xmax = 4, xzero = xzero)
 
+print '\n'
 
-function_3 = lambda x,y : x**2 +2*x + y
+# função precisa ser f(x) = 0 e o número de variáveis sempre deve ser igual  
+functions = [lambda x1,x2: x1+2*x2-2,
+			 lambda x1,x2: np.power(x1,2) + 4*np.power(x2,2) -4  
+			]
 
-print my_lib.derivada_no_ponto(function = function_3, coordenadas = [75,1], indice_variavel = 0 )
+my_lib.metodo_newton_sistemas_nl(functions = functions, num_variaveis = 2)
