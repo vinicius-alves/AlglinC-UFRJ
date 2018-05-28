@@ -9,7 +9,7 @@ def euler(edo, valor_inicial, valor_final, condicao_inicial, numero_passos):
 	t = valor_inicial
 	x0 = condicao_inicial	
 	x = [x0]
-	t_valores = [0]
+	t_valores = [t]
 
 	for i in range(numero_passos):
 
@@ -28,7 +28,7 @@ def runge_kutta_ordem2(edo, valor_inicial, valor_final, condicao_inicial, numero
 	t = valor_inicial
 	x0 = condicao_inicial	
 	x = [x0]
-	t_valores = [0]
+	t_valores = [t]
 
 	for i in range(numero_passos):
 
@@ -47,7 +47,7 @@ def runge_kutta_ordem4(edo, valor_inicial, valor_final, condicao_inicial, numero
 	t = valor_inicial
 	x0 = condicao_inicial	
 	x = [x0]
-	t_valores = [0]
+	t_valores = [t]
 
 	for i in range(numero_passos):
 
@@ -72,7 +72,7 @@ def euler_ordem2(edo, valor_inicial, valor_final, condicao_inicial1, condicao_in
 	x0 = condicao_inicial1
 	dx0 = condicao_inicial2
 	x = [x0]
-	t_valores = [0]
+	t_valores = [t]
 
 	for i in range(numero_passos):
 
@@ -95,7 +95,7 @@ def runge_kutta_nystrom(edo, valor_inicial, valor_final, condicao_inicial1, cond
 	x0 = condicao_inicial1
 	dx0 = condicao_inicial2
 	x = [x0]
-	t_valores = [0]
+	t_valores = [t]
 
 	for i in range(numero_passos):
 
