@@ -42,11 +42,21 @@ for i in range(len(xzero)):
 
 #my_lib.visualizar_funcao(function = function_2, xmin = -20, xmax = 4, xzero = xzero)
 
-print '\n'
+
+print '\nResolução de sistemas não lineares:\n Método de Newton' 
+
+print "Sistema: \n"
 
 # função precisa ser f(x) = 0 e o número de variáveis sempre deve ser igual  
-functions = [lambda x1,x2: x1+2*x2-2,
+functions = [
+			 lambda x1,x2: x1+2*x2-2,
 			 lambda x1,x2: np.power(x1,2) + 4*np.power(x2,2) -4  
 			]
 
-my_lib.metodo_newton_sistemas_nl(functions = functions, num_variaveis = 2)
+for function in functions:
+	print getsource(function)
+
+vetor_solucao = my_lib.metodo_newton_sistemas_nl(functions = functions, num_variaveis = 2, vetor_x = [2,3])
+
+for i in range(len(vetor_solucao)):
+	print "vetor_solucao["+str(i)+"] = "+str("%.3f" % vetor_solucao[i])

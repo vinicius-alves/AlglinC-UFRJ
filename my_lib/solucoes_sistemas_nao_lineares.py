@@ -70,17 +70,32 @@ def bissecao(function, a = -10, b = 10, search_a_b = False ,tol = 0.01):
 	return xi
 
 
-def metodo_newton_sistemas_nl(functions, num_variaveis):
+def metodo_newton_sistemas_nl(functions, num_variaveis, vetor_x = None, tol = 0.0001):
 
-	num_functions = len(functions)
+	num_functions    = len(functions)
+	matriz_jacobiano = np.zeros((num_functions,num_variaveis), dtype = np.float64)
+	matriz_delta_x   = None
+	vetor_x_plus_one = None
+	tolerancia_R     = 1
 
-	jacobiano = np.zeros((num_functions,num_variaveis), dtype = np.float64)
+	if vetor_x == None or len(vetor_x) != num_variaveis:
+		vetor_x = np.ones(num_variaveis) 
 
-	vetor_x = np.ones(num_variaveis) 
+	vetor_f = np.ones(num_functions)
 
-	for i in range(num_functions):
-		for j in range(num_variaveis):
-			jacobiano[i][j] = derivada_no_ponto(function = functions[i], coordenadas = vetor_x , indice_da_variavel = j)
+	while(tolerancia_R > tol):
 
-	print jacobiano
+		for i in range(num_functions):
+			for j in range(num_variaveis):
+				matriz_jacobiano[i][j] = derivada_no_ponto(function = functions[i], coordenadas = vetor_x , indice_da_variavel = j)
 
+		for i in range(num_functions):
+			vetor_f[i] = functions[i](*vetor_x)
+	
+		matriz_delta_x = np.dot(inversa(criar_matriz(matriz_jacobiano)),criar_matriz(vetor_f.reshape(-1,1)))* -1
+		vetor_delta_x = matriz_delta_x.T.A[0]
+		vetor_x_plus_one = vetor_x + vetor_delta_x
+		tolerancia_R = np.linalg.norm(vetor_delta_x)/np.linalg.norm(vetor_x_plus_one)
+		vetor_x = vetor_x_plus_one
+	
+	return vetor_x_plus_one
