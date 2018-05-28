@@ -6,3 +6,5 @@ from .interpolacao import *
 from .minimos_quadrados import *
 
 from .solucoes_sistemas_nao_lineares import *
+from .integracao_numerica import *
+from .edo import *
