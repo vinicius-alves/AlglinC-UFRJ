@@ -99,3 +99,61 @@ def metodo_newton_sistemas_nl(functions, num_variaveis, vetor_x = None, tol = 0.
 		vetor_x = vetor_x_plus_one
 	
 	return vetor_x_plus_one
+
+
+def metodo_broyden_sistemas_nl(functions, num_variaveis, vetor_x = None, tol = 0.0001):
+
+	num_functions     = len(functions)
+	matriz_B          = np.zeros((num_functions,num_variaveis), dtype = np.float64)
+	matriz_delta_x    = None
+	vetor_x_plus_one  = None
+	matriz_B_plus_one = None
+	matriz_Y          = None
+	matriz_F_plus_one = None
+	tolerancia_R      = 1
+
+	if vetor_x == None or len(vetor_x) != num_variaveis:
+		vetor_x = np.ones(num_variaveis) 
+
+	for i in range(num_functions):
+		for j in range(num_variaveis):
+			matriz_B[i][j] = 0.1*i+2*j
+
+	vetor_f = np.ones(num_functions)
+
+	
+	while(tolerancia_R > tol):
+
+		for i in range(num_functions):
+			vetor_f[i] = functions[i](*vetor_x)
+
+		matriz_F = criar_matriz(vetor_f.reshape(-1,1))
+	
+		matriz_delta_x = np.dot(inversa(criar_matriz(matriz_B)),matriz_F)* -1
+		vetor_delta_x = matriz_delta_x.T.A[0]
+		vetor_x_plus_one = vetor_x + vetor_delta_x
+		tolerancia_R = np.linalg.norm(vetor_delta_x)/np.linalg.norm(vetor_x_plus_one)
+
+		for i in range(num_functions):
+			vetor_f[i] = functions[i](*vetor_x_plus_one)
+
+		matriz_F_plus_one = criar_matriz(vetor_f.reshape(-1,1))
+
+		matriz_Y = matriz_F_plus_one - matriz_F
+
+		matriz_B = criar_matriz(matriz_B)
+
+		matriz_delta_x = criar_matriz(vetor_delta_x).reshape(-1,1)
+
+		divisor = (transposta(matriz_delta_x)*matriz_delta_x).A[0][0]
+		
+		matriz_B_plus_one = matriz_B - (matriz_Y - np.dot(np.dot(matriz_B,matriz_delta_x),transposta(matriz_delta_x)))*(1//divisor)
+
+
+		vetor_x = vetor_x_plus_one
+
+		matriz_B = matriz_B_plus_one
+
+	print vetor_x_plus_one
+	
+	return vetor_x_plus_one
