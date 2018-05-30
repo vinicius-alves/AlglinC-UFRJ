@@ -4,7 +4,7 @@ import my_lib
 import numpy as np
 from inspect import getsource
 
-print '\nMétodo da Bisseção:\n' 
+print '\nMetodo da Bissecao:\n' 
 
 # Aplicação 1
 
@@ -43,7 +43,7 @@ for i in range(len(xzero)):
 #my_lib.visualizar_funcao(function = function_2, xmin = -20, xmax = 4, xzero = xzero)
 
 
-print '\nResolução de sistemas não lineares:\n Método de Newton' 
+print '\nResolucao de sistemas nao lineares:' 
 
 print "Sistema: \n"
 
@@ -56,7 +56,17 @@ functions = [
 for function in functions:
 	print getsource(function)
 
+print '\n Metodo de Newton' 
+
 vetor_solucao = my_lib.metodo_newton_sistemas_nl(functions = functions, num_variaveis = 2, vetor_x = [2,3])
+
+for i in range(len(vetor_solucao)):
+	print "vetor_solucao["+str(i)+"] = "+str("%.3f" % vetor_solucao[i])
+
+
+print '\n Metodo de Broyden' 
+
+vetor_solucao = my_lib.metodo_broyden_sistemas_nl(functions = functions, num_variaveis = 2, vetor_x = [2,3])
 
 for i in range(len(vetor_solucao)):
 	print "vetor_solucao["+str(i)+"] = "+str("%.3f" % vetor_solucao[i])
