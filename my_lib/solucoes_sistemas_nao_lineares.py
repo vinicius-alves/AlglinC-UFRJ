@@ -101,10 +101,11 @@ def metodo_newton_sistemas_nl(functions, num_variaveis, vetor_x = None, tol = 0.
 	return vetor_x_plus_one
 
 
-def metodo_broyden_sistemas_nl(functions, num_variaveis, vetor_x = None, tol = 0.0001):
+def metodo_broyden_sistemas_nl(functions, num_variaveis, vetor_x = None, tol = 0.00001):
 
 	num_functions     = len(functions)
 	matriz_B          = np.zeros((num_functions,num_variaveis), dtype = np.float64)
+	matriz_jacobiano = np.zeros((num_functions,num_variaveis), dtype = np.float64)
 	matriz_delta_x    = None
 	vetor_x_plus_one  = None
 	matriz_B_plus_one = None
@@ -115,21 +116,26 @@ def metodo_broyden_sistemas_nl(functions, num_variaveis, vetor_x = None, tol = 0
 	if vetor_x == None or len(vetor_x) != num_variaveis:
 		vetor_x = np.ones(num_variaveis) 
 
+
 	for i in range(num_functions):
 		for j in range(num_variaveis):
-			matriz_B[i][j] = 0.1*i+2*j
+			matriz_jacobiano[i][j] = derivada_no_ponto(function = functions[i], coordenadas = vetor_x , indice_da_variavel = j)
+
+	matriz_B = matriz_jacobiano
 
 	vetor_f = np.ones(num_functions)
 
-	
-	while(tolerancia_R > tol):
+	c=0
+	while(c ==0):#tolerancia_R > tol):
+		c+=1
 
 		for i in range(num_functions):
 			vetor_f[i] = functions[i](*vetor_x)
 
 		matriz_F = criar_matriz(vetor_f.reshape(-1,1))
 	
-		matriz_delta_x = np.dot(inversa(criar_matriz(matriz_B)),matriz_F)* -1
+		matriz_delta_x = - np.dot(inversa(criar_matriz(matriz_B)),matriz_F)
+
 		vetor_delta_x = matriz_delta_x.T.A[0]
 		vetor_x_plus_one = vetor_x + vetor_delta_x
 		tolerancia_R = np.linalg.norm(vetor_delta_x)/np.linalg.norm(vetor_x_plus_one)
@@ -147,13 +153,16 @@ def metodo_broyden_sistemas_nl(functions, num_variaveis, vetor_x = None, tol = 0
 
 		divisor = (transposta(matriz_delta_x)*matriz_delta_x).A[0][0]
 		
-		matriz_B_plus_one = matriz_B - (matriz_Y - np.dot(np.dot(matriz_B,matriz_delta_x),transposta(matriz_delta_x)))*(1//divisor)
+		matriz_B_plus_one = matriz_B - (matriz_Y - np.dot(matriz_B,matriz_delta_x))*(1/np.float(divisor))
+		
+		#print((matriz_Y - np.dot(matriz_B,matriz_delta_x))*(1/np.float(divisor)))
 
+		#print(matriz_B_plus_one)
 
 		vetor_x = vetor_x_plus_one
 
 		matriz_B = matriz_B_plus_one
 
-	print vetor_x_plus_one
+	#print vetor_x_plus_one
 	
 	return vetor_x_plus_one
