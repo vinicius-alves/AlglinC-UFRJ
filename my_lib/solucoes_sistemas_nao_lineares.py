@@ -72,15 +72,12 @@ def bissecao(function, a = -10, b = 10, search_a_b = False ,tol = 0.01):
 def metodo_newton_original(function, tol = 0.0001, ponto_inicial = 10):
 
 	x = ponto_inicial
-
 	tolerancia_R  = 1
 
 	while(tolerancia_R > tol):
 
 		x_plus_one = x - function(x)/derivada_no_ponto(function,coordenadas = [x], indice_da_variavel = 0)
-
 		tolerancia_R = np.abs(x_plus_one-x)
-
 		x = x_plus_one
 
 	return x_plus_one
@@ -88,23 +85,16 @@ def metodo_newton_original(function, tol = 0.0001, ponto_inicial = 10):
 def metodo_newton_secante(function, tol = 0.0001, ponto_inicial = 10):
 
 	x = ponto_inicial
-
 	x_plus_one = x + 0.001
-
 	tolerancia_R  = 1
-
 	fa = function(x)
 
 	while(tolerancia_R > tol):
 
 		fi = function(x_plus_one)
-
 		x_plus_one = x - fi*(x_plus_one-x)/(fi-fa)
-
 		tolerancia_R = np.abs(x_plus_one-x)
-
 		x = x_plus_one
-
 		fa = fi
 
 	return x_plus_one
