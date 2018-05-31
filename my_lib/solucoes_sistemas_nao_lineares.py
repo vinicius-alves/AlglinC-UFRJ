@@ -100,6 +100,46 @@ def metodo_newton_secante(function, tol = 0.0001, ponto_inicial = 10):
 	return x_plus_one
 
 
+def interpolacao_inversa(function, tol = 0.0001, ponto_inicial = 3):
+
+	tolerancia_R = 1
+
+	x0 = 10E+36
+	x1 = ponto_inicial 
+	x2 = ponto_inicial + 2
+	x3 = ponto_inicial + 5
+
+	while(tolerancia_R > tol):
+
+		y1 = function(x1)
+		y2 = function(x2)
+		y3 = function(x3)
+
+		xk = (y2*y3*x1)/((y1-y2)*(y1-y3)*1.) + (y1*y3*x2)/((y2-y1)*(y2-y3)*1.) + (y1*y2*x3)/((y3-y1)*(y3-y2)*1.)
+
+		tolerancia_R = np.abs(xk-x0)
+
+		if y1>=y2 and y1 >= y3:
+			x1 = xk
+
+		elif y2>=y1 and y2 >= y3:
+			x2 = xk
+
+		elif y3>=y1 and y3 >= y2:
+			x3 = xk
+
+		arr = np.sort([x1,x2,x3])
+
+		x1 = arr[0]
+		x2 = arr[1]
+		x3 = arr[2]
+
+		
+	return xk
+
+
+
+
 def metodo_newton_sistemas_nl(functions, num_variaveis, vetor_x = None, tol = 0.0001):
 
 	num_functions    = len(functions)

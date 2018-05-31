@@ -14,7 +14,10 @@ print '\nAplicacao 1:\n'
 g = 9.806
 k = 0.00341
 
-function_1 = lambda x : np.log(np.cosh(x*np.sqrt(g*k))) - 50
+#function_1 = lambda x : np.log(np.cosh(x*np.sqrt(g*k))) - 50
+
+function_1 = lambda x : np.power(x,2) - 4*np.cos(x)
+
 
 print getsource(function_1)
 
@@ -40,6 +43,12 @@ xzero[0] = my_lib.metodo_newton_secante(function = function_1, ponto_inicial = -
 xzero[1] = my_lib.metodo_newton_secante(function = function_1, ponto_inicial =  10)
 
 imprimir_vetor_xzero(xzero)
+
+
+
+print '\n   Interpolacao inversa:\n'
+
+my_lib.interpolacao_inversa(function = function_1, ponto_inicial =  3)
 
 #my_lib.visualizar_funcao(function = function_1, xmin = -600, xmax = 600, xzero = xzero)
 
