@@ -3,7 +3,7 @@
 import my_lib
 import numpy as np
 from inspect import getsource
-'''
+
 def imprimir_vetor_xzero(vetor_xzero):
 	for i in range(len(xzero)):
 		print "   xzero["+str(i)+"] = "+str("%.4f"%xzero[i])
@@ -73,7 +73,7 @@ imprimir_vetor_xzero(xzero)
 
 #my_lib.visualizar_funcao(function = function_2, xmin = -20, xmax = 4, xzero = xzero)
 
-'''
+
 print '\nResolucao de sistemas nao lineares:' 
 
 def imprimir_vetor_solucao(vetor_sol):
@@ -107,7 +107,7 @@ vetor_solucao = my_lib.metodo_broyden_sistemas_nl(functions = functions, num_var
 
 imprimir_vetor_solucao(vetor_solucao)
 
-print '\nAplicacao 4:\n' 
+print '\nAplicacao 4:' 
 
 print " Sistema:"
 
@@ -132,7 +132,6 @@ for valor_teta in valores_teta:
 	print 'teta_um:   ' + str(teta_um)
 	print 'teta_dois: ' + str(teta_dois)
 
-
 	print '\n Metodo de Newton\n' 
 
 	vetor_solucao = my_lib.metodo_newton_sistemas_nl(functions = functions, num_variaveis = 3, vetor_x = [1,1,1])
@@ -144,3 +143,27 @@ for valor_teta in valores_teta:
 	vetor_solucao = my_lib.metodo_broyden_sistemas_nl(functions = functions, num_variaveis = 3, vetor_x = [1,1,1])
 
 	imprimir_vetor_solucao(vetor_solucao)
+
+
+
+print '\nAplicacao 5:' 
+
+# a primeira variável deve ser x, e as restantes, parâmetros b0, b1...
+function_3 = lambda x,b0,b1,b2: b0 + b1*np.power(x,b2)
+
+print '\n Funcao a ser interpolada: '
+
+print getsource(function_3)
+
+pontos_x = [1.0,2.0,3.0]
+
+pontos_y = [1.0,2.0,9.0]
+
+vetor_b = my_lib.interpolacao_nl(function = function_3, pontos_x = pontos_x, pontos_y = pontos_y, num_parametros_b = 3, vetor_b = [1,1,1] )
+
+for i in range(len(vetor_b)):
+		print "   vetor_b["+str(i)+"] = "+str("%.4f"%vetor_b[i])
+
+#my_lib.visualizar_funcao(function = lambda x: vetor_b[0] + vetor_b[1]*np.power(x,vetor_b[2]), xmin = -5, xmax = 7, xzero = vetor_b)
+
+

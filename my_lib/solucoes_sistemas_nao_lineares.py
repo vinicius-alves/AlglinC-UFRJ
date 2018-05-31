@@ -181,3 +181,41 @@ def metodo_broyden_sistemas_nl(functions, num_variaveis, vetor_x = None, tol = 0
 		matriz_B = matriz_B_plus_one
 	
 	return vetor_x_plus_one
+
+
+def interpolacao_nl(function, pontos_x, pontos_y, num_parametros_b , vetor_b = None, tol = 0.0001):
+
+	num_pontos       = len(pontos_x)
+	matriz_jacobiano = np.zeros((num_pontos,num_parametros_b), dtype = np.float64)
+	matriz_delta_b   = None
+	vetor_b_plus_one = None
+	tolerancia_R     = 1
+	vetor_f = np.ones(num_pontos)
+
+	if vetor_b == None or len(vetor_b) != num_parametros_b:
+		vetor_b = np.ones(num_parametros_b) 
+
+	while(tolerancia_R > tol):
+		
+
+		for i in range(num_pontos):
+				for j in range(num_parametros_b):
+					coords = [pontos_x[i]]+vetor_b
+					matriz_jacobiano[i][j] = derivada_no_ponto(function = function, coordenadas = coords, indice_da_variavel = j+1)
+
+
+		for i in range(num_pontos):
+			coords = [pontos_x[i]]+vetor_b
+			vetor_f[i] = function(*coords) - pontos_y[i]
+
+
+		matriz_F = criar_matriz(vetor_f.reshape(-1,1))
+		matriz_delta_b = - np.dot(inversa(np.dot(transposta(matriz_jacobiano),matriz_jacobiano)), np.dot(transposta(matriz_jacobiano),matriz_F))
+		vetor_delta_b = matriz_delta_b.T.A[0]
+
+		vetor_b_plus_one = vetor_b + vetor_delta_b
+		tolerancia_R = np.linalg.norm(vetor_delta_b)/np.linalg.norm(vetor_b_plus_one)
+		vetor_b = list(vetor_b_plus_one)
+	
+
+	return vetor_b_plus_one
