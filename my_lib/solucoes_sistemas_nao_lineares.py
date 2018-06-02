@@ -100,42 +100,43 @@ def metodo_newton_secante(function, tol = 0.0001, ponto_inicial = 10):
 	return x_plus_one
 
 
-def interpolacao_inversa(function, tol = 0.0001, ponto_inicial = 3):
+def interpolacao_inversa(function, tol = 0.0001, ponto_inicial = 1 , max_iter = 2000):
 
 	tolerancia_R = 1
 
-	x0 = 10E+36
-	x1 = ponto_inicial 
-	x2 = ponto_inicial + 2
-	x3 = ponto_inicial + 5
+	x1 = ponto_inicial
 
-	while(tolerancia_R > tol):
+	y1 = function(x1)
+	if np.fabs(function(x1 + y1) - y1) != 0:
+		x2 = x1 - y1*y1/(function(x1 + y1) - y1)
+	else:
+		x2 = 0.001
+
+	y2 = function(x2)
+	if y1 != y2:
+		x3 = x2 - y2*(x1 - x2)/(y1 - y2)
+	else:
+		x3 = 0.001
+
+	iter = 0
+
+	while(tolerancia_R > tol and iter < max_iter):
+
+		iter+=1
 
 		y1 = function(x1)
 		y2 = function(x2)
 		y3 = function(x3)
 
-		xk = (y2*y3*x1)/((y1-y2)*(y1-y3)*1.) + (y1*y3*x2)/((y2-y1)*(y2-y3)*1.) + (y1*y2*x3)/((y3-y1)*(y3-y2)*1.)
+		x4 = (y2*y3*x1)/((y1-y2)*(y1-y3)*1.) + (y1*y3*x2)/((y2-y1)*(y2-y3)*1.) + (y1*y2*x3)/((y3-y1)*(y3-y2)*1.)
 
-		tolerancia_R = np.abs(xk-x0)
+		tolerancia_R = np.abs(x4-x1)
 
-		if y1>=y2 and y1 >= y3:
-			x1 = xk
+		x1 = x2
+		x2 = x3
+		x3 = x4
 
-		elif y2>=y1 and y2 >= y3:
-			x2 = xk
-
-		elif y3>=y1 and y3 >= y2:
-			x3 = xk
-
-		arr = np.sort([x1,x2,x3])
-
-		x1 = arr[0]
-		x2 = arr[1]
-		x3 = arr[2]
-
-		
-	return xk
+	return x4
 
 
 

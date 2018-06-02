@@ -44,11 +44,12 @@ xzero[1] = my_lib.metodo_newton_secante(function = function_1, ponto_inicial =  
 
 imprimir_vetor_xzero(xzero)
 
-
-
 print '\n   Interpolacao inversa:\n'
 
-my_lib.interpolacao_inversa(function = function_1, ponto_inicial =  3)
+xzero[0] = my_lib.interpolacao_inversa(function = function_1, ponto_inicial =  -10)
+xzero[1] = my_lib.interpolacao_inversa(function = function_1, ponto_inicial =   10)
+
+imprimir_vetor_xzero(xzero)
 
 #my_lib.visualizar_funcao(function = function_1, xmin = -600, xmax = 600, xzero = xzero)
 
@@ -77,6 +78,12 @@ imprimir_vetor_xzero(xzero)
 print '\n   Newton secante:\n' 
 
 xzero[0] = my_lib.metodo_newton_original(function = function_2, ponto_inicial = -10)
+
+imprimir_vetor_xzero(xzero)
+
+print '\n   Interpolacao inversa:\n'
+
+xzero[0] = my_lib.interpolacao_inversa(function = function_2, ponto_inicial =  -10)
 
 imprimir_vetor_xzero(xzero)
 
@@ -116,7 +123,7 @@ vetor_solucao = my_lib.metodo_broyden_sistemas_nl(functions = functions, num_var
 
 imprimir_vetor_solucao(vetor_solucao)
 
-print '\nAplicacao 4:' 
+print '\nAplicacao 4:\n' 
 
 print " Sistema:"
 
@@ -129,6 +136,9 @@ functions = [
   lambda c2,c3,c4: 8*np.power(c3,3) + 6*c3*np.power(c2,2) + 36*c3*c2*c4 + 108*c3*np.power(c4,2) -teta_um,
   lambda c2,c3,c4: 60*np.power(c3,4) + 60*np.power(c3,2)*np.power(c2,2) + 576*c4*c2*np.power(c3,2) + 2232*np.power(c3,2)*np.power(c4,2) + 252*np.power(c4,2)*np.power(c2,2) + 1296*c2*np.power(c4,3) + 3348*np.power(c4,4) + 24*c4*np.power(c2,3) + 3*c2 - teta_dois
 			]
+
+for function in functions:
+	print getsource(function)
 
 valores_teta = [[0.0, 3.5],[0.75,6.5],[0.0,11.667]]
 
